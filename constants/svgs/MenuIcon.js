@@ -1,0 +1,14 @@
+import React from "react";
+import { SvgXml } from "react-native-svg";
+
+export default function MenuIcon() {
+  const logo = `<svg width="55" height="56" viewBox="0 0 55 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="0.5" width="55" height="55" rx="27.5" fill="black"/>
+<path d="M16 36.4286H29.1429M16 28.2143H39M25.8571 20H39" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+`
+  const SvgImage = () => <SvgXml xml={logo} />;
+
+  return <SvgImage />;
+};
