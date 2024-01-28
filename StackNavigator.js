@@ -84,11 +84,9 @@ function TabsScreen() {
         backgroundColor: 'white',
         elevation: 10,
         shadowColor: '#000',
-        shadowRadius: 10,
+        shadowRadius: 30,
         shadowOpacity: 0.2,
         height: 90,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
       },
       headerShown: false,
     })}>

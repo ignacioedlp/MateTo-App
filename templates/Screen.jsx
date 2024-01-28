@@ -7,7 +7,7 @@ const Screen = ({ children }) => {
   return (
     <SafeAreaView className={`bg-[#FFFFFF] ${Platform.OS === "android" && "pt-10"}`}>
       <StatusBar style="light" />
-      <View className="w-full px-7">
+      <View className="w-full px-7 ">
         {children}
       </View>
     </SafeAreaView>

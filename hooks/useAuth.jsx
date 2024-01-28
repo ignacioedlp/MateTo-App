@@ -35,21 +35,6 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithApi = async (email, password) => {
     try {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: {
-          "email": email,
-          "password": password
-        },
-        redirect: 'follow'
-      };
-
       const { data } = await apiServices.auth.login({
         data: {
           "email": email,
@@ -71,32 +56,18 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const signUpWithApi = async (email, password, passwordConfirmation) => {
+  const signUpWithApi = async (email, password, passwordConfirmation, name, otp, username) => {
     try {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
-
       const { data } = await apiServices.auth.register({
         data: {
-          user: {
-            "email": email,
-            "password": password,
-            "password_confirmation": passwordConfirmation
-          }
+          "email": email,
+          "password": password,
+          "passwordConfirmation": passwordConfirmation,
+          "name": name,
+          "otp": otp,
+          "username": username
         }
       }).request
-
-      const { user, token } = data;
-
-      setUser(user);
-      setToken(token);
     }
     catch (error) {
       console.log(error);

@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
   return (
     <Screen>
       <View className="flex flex-col justify-between h-full py-16">
-        <View className="flex flex-col justify-center items-center">
+        <View className="flex flex-col items-center justify-center">
           <View className="my-6">
             <MateIcon />
           </View>
@@ -19,12 +19,12 @@ const WelcomeScreen = () => {
             <MatetoLogo />
           </View>
         </View>
-        <View className="flex flex-col gap-4 justify-center items-center">
+        <View className="flex flex-col items-center justify-center gap-4">
           <TouchableOpacity className="w-full bg-black h-[55px] items-center justify-center rounded-full" onPress={() => navigation.navigate('Login')}>
-            <Text className="text-white font-medium text-xl">Iniciar sesion</Text>
+            <Text className="text-xl font-medium text-white">Iniciar sesion</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="w-full border-black border-2 h-[55px] items-center justify-center rounded-full" onPress={() => navigation.navigate('Login')}>
-            <Text className=" font-medium text-xl">Registrarme</Text>
+          <TouchableOpacity className="w-full border-black border-2 h-[55px] items-center justify-center rounded-full" onPress={() => navigation.navigate('SignUp')}>
+            <Text className="text-xl font-medium ">Registrarme</Text>
           </TouchableOpacity>
         </View>
       </View>

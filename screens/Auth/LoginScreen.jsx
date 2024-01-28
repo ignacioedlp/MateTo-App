@@ -17,7 +17,7 @@ const LoginScreen = () => {
 
 
   const login = () => {
-    signInWithApi(email.toLowerCase(), password.toLowerCase());
+    signInWithApi(email.toLowerCase(), password);
   }
 
   return (
@@ -44,7 +44,7 @@ const LoginScreen = () => {
               />
             </View>
             <View className="flex flex-col pb-3 space-y-2 border-b-2">
-              <Text className="text-[16px]  font-bold">Password</Text>
+              <Text className="text-[16px]  font-bold">Contraseña</Text>
               <TextInput
                 placeholder="Password"
                 onChangeText={setPassword}
