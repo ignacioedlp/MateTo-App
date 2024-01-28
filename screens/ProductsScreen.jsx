@@ -15,7 +15,7 @@ const ProductsScreen = () => {
   const navigation = useNavigation();
   const animation = useRef(null);
   const { user, token } = useAuth();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [settings, setSettings] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,7 +30,7 @@ const ProductsScreen = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [section, setSection] = useState("news");
 
-  const snapPoints = useMemo(() => ['80%', '100%'], []);
+  const snapPoints = useMemo(() => ['85%'], []);
 
   const bottomSheetRef = useRef(null);
 
@@ -75,9 +75,9 @@ const ProductsScreen = () => {
     getSettings();
   }, []);
 
-  useEffect(() => {
-    fetchProducts()
-  }, [selectedType, selectedCategory, range, selectedColors, selectedSizes, currentPage]);
+  //useEffect(() => {
+    //fetchProducts()
+    //}, [selectedType, selectedCategory, range, selectedColors, selectedSizes, currentPage]);
 
   const handleAddColor = color => {
     if (selectedColors.find((selectedColor) => selectedColor === color)) {

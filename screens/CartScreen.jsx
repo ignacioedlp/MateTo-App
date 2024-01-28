@@ -14,7 +14,7 @@ import CartEmpty from '../constants/svgs/CartEmpty'
 import apiServices from '../utils/apiServices';
 import * as WebBrowser from 'expo-web-browser';
 
-/* 
+/*
 { "author": { "id": 36, "name": "Mateando" }, "authorId": 36, "category": { "name": "metalico" }, "categoryId": 9, "colors": [{ "hex": "#F7FAFC", "name": "white" }, { "hex": "#F687B3", "name": "pink" }], "comments": [], "createdAt": "2024-01-15T22:14:43.895Z", "description": "Lleva a la argentina siempre", "id": 26, "imageUrls": ["https://vjfkuwaqdwqtqgpmbldg.supabase.co/storage/v1/object/public/cms_mateto/vendors/36/150120241442_bombillas_y_mates_uruguayos_1692299994_3171564685388133308_3449486550.heic"], "price": 20000, "published": true, "ratings": [], "sizes": [{ "name": "M" }, { "name": "L" }, { "name": "XXL" }], "stock": 98, "title": "Termos seleccion", "type": { "name": "termos" }, "typeId": 10, "updatedAt": "2024-01-16T01:41:08.493Z" } */
 
 
@@ -129,11 +129,13 @@ const CartScreen = ({ route }) => {
                         </View>
                       </View>
                       <View className="flex flex-col justify-end h-[100px] ">
-                        <View className="flex-row items-center bg-[#F3F4F6] rounded-full mb-2">
+                        <View className="flex-row items-center bg-[#F3F4F6] rounded-full mb-2 justify-center">
                           <TouchableOpacity onPress={() => decrement(mate.id)} className="p-2">
                             <Entypo name="minus" size={15} color="black" />
                           </TouchableOpacity>
-                          <TextInput className="mx-2 mb-2 text-sm" editable={false} defaultValue={`${mate.quantity}`} value={`${mate.quantity}`} />
+                          <View className="mx-2 text-center flex items-center justify-center">
+                            <Text className=" text-sm" > {mate.quantity} </Text>
+                          </View>
                           <TouchableOpacity onPress={() => increment(mate.id)} className="p-2">
                             <Entypo name="plus" size={15} color="black" />
                           </TouchableOpacity>

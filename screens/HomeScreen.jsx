@@ -29,7 +29,7 @@ const HomeScreen = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [section, setSection] = useState("news");
 
-  const snapPoints = useMemo(() => ['80%', '100%'], []);
+  const snapPoints = useMemo(() => ['85%'], []);
 
   const bottomSheetRef = useRef(null);
 

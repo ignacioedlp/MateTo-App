@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tinder-app",
-    "slug": "tinder-app",
+    "name": "MateTo",
+    "slug": "mateto-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.tofiedlp1.matetoapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "608fe35a-b6a8-4270-8d3e-efb6d20c2998"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/608fe35a-b6a8-4270-8d3e-efb6d20c2998"
     }
   }
 }

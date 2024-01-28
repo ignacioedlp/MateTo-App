@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import MatetoLogo from '../../constants/svgs/MatetoLogo.js';
 import Screen from '../../templates/Screen';
 import AntDesign from '@expo/vector-icons/AntDesign.js';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6.js';
+import Entypo from '@expo/vector-icons/Entypo.js';
 
 
 const LoginScreen = () => {
@@ -68,7 +68,7 @@ const LoginScreen = () => {
             <Text className="text-xl font-medium ">Continuar con google</Text>
           </TouchableOpacity>
           <TouchableOpacity className="w-full border-black border-2 h-[55px] items-center justify-center rounded-full flex flex-row space-x-3" onPress={() => navigation.navigate('Login')}>
-            <FontAwesome6 name="x-twitter" size={24} color="black" />
+            <Entypo name="twitter" size={24} color="black" />
             <Text className="text-xl font-medium ">Continuar con twitter</Text>
           </TouchableOpacity>
         </View>

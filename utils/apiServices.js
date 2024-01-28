@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import { API_URL } from '@env'
 
 const instance = axios.create({
-  baseURL: "http://localhost:4000/api/v1",
+  baseURL: API_URL,
   maxRedirects: 0,
   headers: {
     Accept: "application/json",
