@@ -13,6 +13,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import CartEmpty from '../constants/svgs/CartEmpty'
 import apiServices from '../utils/apiServices';
 import * as WebBrowser from 'expo-web-browser';
+import LoadingModal from '../components/Loader.jsx';
 
 /*
 { "author": { "id": 36, "name": "Mateando" }, "authorId": 36, "category": { "name": "metalico" }, "categoryId": 9, "colors": [{ "hex": "#F7FAFC", "name": "white" }, { "hex": "#F687B3", "name": "pink" }], "comments": [], "createdAt": "2024-01-15T22:14:43.895Z", "description": "Lleva a la argentina siempre", "id": 26, "imageUrls": ["https://vjfkuwaqdwqtqgpmbldg.supabase.co/storage/v1/object/public/cms_mateto/vendors/36/150120241442_bombillas_y_mates_uruguayos_1692299994_3171564685388133308_3449486550.heic"], "price": 20000, "published": true, "ratings": [], "sizes": [{ "name": "M" }, { "name": "L" }, { "name": "XXL" }], "stock": 98, "title": "Termos seleccion", "type": { "name": "termos" }, "typeId": 10, "updatedAt": "2024-01-16T01:41:08.493Z" } */
@@ -28,6 +29,7 @@ const CartScreen = ({ route }) => {
   const [mates, setMates] = useState(null);
   const [creationOrder, setCreationOrder] = useState(false)
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getMate = async () => {
@@ -71,34 +73,34 @@ const CartScreen = ({ route }) => {
   };
 
   const createOrder = async () => {
-    setCreationOrder(true)
-    const { data } = await apiServices.purchases.createPurchase({
-      userAuthToken: token,
-      data: {
-        totalDiscount: 0,
-        addressLine: "Calle 123",
-        city: "CABA",
-        state: "CABA",
-        postalCode: "1234",
-        phoneNumber: "1234567890",
-        purchaseItems: mates.map(item => {
-          return {
-            productId: item.product.id,
-            quantity: item.quantity,
-            price: item.product.price,
-            title: item.product.title
-          }
-        })
-      },
-    }).request
+    try {
+      const { data } = await apiServices.purchases.createPurchase({
+        userAuthToken: token,
+        data: {
+          totalDiscount: 0,
+          addressLine: "Calle 123",
+          city: "CABA",
+          state: "CABA",
+          postalCode: "1234",
+          phoneNumber: "1234567890",
+          purchaseItems: mates.map(item => {
+            return {
+              productId: item.product.id,
+              quantity: item.quantity,
+              price: item.product.price,
+              title: item.product.title
+            }
+          })
+        },
+      }).request
 
-    setCreationOrder(false)
-
-    if (data.preference.sandbox_init_point) {
-      let result = await WebBrowser.openBrowserAsync(data.preference.sandbox_init_point);
-      setResult(result);
+      if (data.preference.sandbox_init_point) {
+        let result = await WebBrowser.openBrowserAsync(data.preference.sandbox_init_point);
+        setResult(result);
+      }
+    } catch (e) {
+      console.log(e)
     }
-
   }
 
 
@@ -133,8 +135,8 @@ const CartScreen = ({ route }) => {
                           <TouchableOpacity onPress={() => decrement(mate.id)} className="p-2">
                             <Entypo name="minus" size={15} color="black" />
                           </TouchableOpacity>
-                          <View className="mx-2 text-center flex items-center justify-center">
-                            <Text className=" text-sm" > {mate.quantity} </Text>
+                          <View className="flex items-center justify-center mx-2 text-center">
+                            <Text className="text-sm " > {mate.quantity} </Text>
                           </View>
                           <TouchableOpacity onPress={() => increment(mate.id)} className="p-2">
                             <Entypo name="plus" size={15} color="black" />

@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import apiServices from '../utils/apiServices';
+import LoadingModal from '../components/Loader.jsx';
 
 /* 
 { "author": { "id": 36, "name": "Mateando" }, "authorId": 36, "category": { "name": "metalico" }, "categoryId": 9, "colors": [{ "hex": "#F7FAFC", "name": "white" }, { "hex": "#F687B3", "name": "pink" }], "comments": [], "createdAt": "2024-01-15T22:14:43.895Z", "description": "Lleva a la argentina siempre", "id": 26, "imageUrls": ["https://vjfkuwaqdwqtqgpmbldg.supabase.co/storage/v1/object/public/cms_mateto/vendors/36/150120241442_bombillas_y_mates_uruguayos_1692299994_3171564685388133308_3449486550.heic"], "price": 20000, "published": true, "ratings": [], "sizes": [{ "name": "M" }, { "name": "L" }, { "name": "XXL" }], "stock": 98, "title": "Termos seleccion", "type": { "name": "termos" }, "typeId": 10, "updatedAt": "2024-01-16T01:41:08.493Z" } */
@@ -31,6 +32,7 @@ const ProductScreen = ({ route }) => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const increment = () => {
     if (mate.stock > quantity) {
@@ -46,6 +48,7 @@ const ProductScreen = ({ route }) => {
 
   const addCart = async (id) => {
     try {
+      setLoading(true);
       await apiServices.user.cart.addToCart({
         userAuthToken: token,
         data: {
@@ -53,8 +56,9 @@ const ProductScreen = ({ route }) => {
           quantity: quantity
         },
       }).request
-
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error('Error al agregar al carrito:', error);
     }
   }
@@ -228,6 +232,7 @@ const ProductScreen = ({ route }) => {
           </View>
         </Screen>
       }
+      <LoadingModal visible={loading} text="Cebando..." />
     </View>
   )
 }

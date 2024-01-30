@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { API_URL } from '@env'
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.EXPO_PUBLIC_API_URL,
   maxRedirects: 0,
   headers: {
     Accept: "application/json",

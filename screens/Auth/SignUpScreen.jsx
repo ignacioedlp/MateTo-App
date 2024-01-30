@@ -51,14 +51,14 @@ const LoginScreen = () => {
               <Text className="text-[16px] ">Crea una cuenta para continuar en la app</Text>
             </View>
             <View className="flex flex-col w-full space-y-8">
-              <View className="flex flex-col pb-3 space-y-2 border-b-2">
+              <View className="flex flex-col space-y-2">
                 <Text className="text-[16px]  font-bold">Su rol</Text>
-                <View className="flex flex-row justify-between ">
-                  <TouchableOpacity className={`items-center justify-center w-2/5 h-[55px] px-8 py-5 ${isUser ? "bg-black " : "bg-white border border-black "} rounded-full`} onPress={() => setIsUser(true)}>
-                    <Text className={`font-medium text-md ${isUser ? "text-white " : "text-black"}`}>Usuario</Text>
+                <View className="flex flex-row justify-between space-x-2">
+                  <TouchableOpacity className={`items-center justify-center w-[150px] h-[55px] px-8 py-3 ${isUser ? "bg-black " : "bg-white border border-black "} rounded-full`} onPress={() => setIsUser(true)}>
+                    <Text className={`font-medium text-lg ${isUser ? "text-white " : "text-black"}`}>Usuario</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity className={`items-center justify-center  w-2/5 h-[55px] px-8 py-5 ${!isUser ? "bg-black " : "bg-white  border border-black"} rounded-full`} onPress={() => setIsUser(false)}>
-                    <Text className={`font-medium text-md ${!isUser ? "text-white " : "text-black"}`}>Vendedor</Text>
+                  <TouchableOpacity className={`items-center justify-center  w-[150px] h-[55px] px-8 py-3 ${!isUser ? "bg-black " : "bg-white  border border-black"} rounded-full`} onPress={() => setIsUser(false)}>
+                    <Text className={`font-medium text-lg ${!isUser ? "text-white " : "text-black"}`}>Vendedor</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -117,18 +117,18 @@ const LoginScreen = () => {
                     className="text-[16px]"
                   />
                 </View>
-                <TouchableOpacity className={`items-center justify-center h-[55px] px-8 py-5 bg-black ${email === '' ? "bg-gray-400" : "bg-black"} rounded-full`} onPress={() => getOtp()} disabled={email === ''}>
-                  <Text className="font-medium text-white text-md">Obtener</Text>
+                <TouchableOpacity className={`items-center justify-center h-[55px] px-8 py-3 bg-black ${email === '' ? "bg-gray-400" : "bg-black"} rounded-full`} onPress={() => getOtp()} disabled={email === ''}>
+                  <Text className="text-lg font-medium text-white">Obtener</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
         </ScrollView>
-        <View className="flex flex-col items-center justify-center gap-4">
-          <TouchableOpacity className={`w-full bg-black h-[55px] items-center justify-center rounded-full ${otp === '' ? "bg-gray-400" : "bg-black"} rounded-full`} disabled={otp === ''} onPress={() => register()}>
-            <Text className="text-xl font-medium text-white">Crear cuenta</Text>
-          </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity className={`w-full bg-black h-[55px] items-center justify-center mb-3 rounded-full ${otp === '' ? "bg-gray-400" : "bg-black"} rounded-full`} disabled={otp === ''} onPress={() => register()}>
+          <Text className="text-xl font-medium text-white">Crear cuenta</Text>
+        </TouchableOpacity>
+
       </View>
     </Screen >
 

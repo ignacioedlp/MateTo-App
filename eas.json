@@ -10,7 +10,10 @@
     },
     "preview": {
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://mateto-api-production.up.railway.app/api/v1"
+      }
     },
     "production": {
       "channel": "production"
