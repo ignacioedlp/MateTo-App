@@ -13,6 +13,7 @@ import LottieView from 'lottie-react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import apiServices from '../utils/apiServices';
 import LoadingModal from '../components/Loader.jsx';
+import ModalError from '../components/ModalError.jsx';
 
 /* 
 { "author": { "id": 36, "name": "Mateando" }, "authorId": 36, "category": { "name": "metalico" }, "categoryId": 9, "colors": [{ "hex": "#F7FAFC", "name": "white" }, { "hex": "#F687B3", "name": "pink" }], "comments": [], "createdAt": "2024-01-15T22:14:43.895Z", "description": "Lleva a la argentina siempre", "id": 26, "imageUrls": ["https://vjfkuwaqdwqtqgpmbldg.supabase.co/storage/v1/object/public/cms_mateto/vendors/36/150120241442_bombillas_y_mates_uruguayos_1692299994_3171564685388133308_3449486550.heic"], "price": 20000, "published": true, "ratings": [], "sizes": [{ "name": "M" }, { "name": "L" }, { "name": "XXL" }], "stock": 98, "title": "Termos seleccion", "type": { "name": "termos" }, "typeId": 10, "updatedAt": "2024-01-16T01:41:08.493Z" } */
@@ -33,6 +34,7 @@ const ProductScreen = ({ route }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const increment = () => {
     if (mate.stock > quantity) {
@@ -70,6 +72,35 @@ const ProductScreen = ({ route }) => {
     }).request
   }
 
+  const removeToFavorites = async () => {
+    await apiServices.user.favorites.deleteFromFavorites({
+      userAuthToken: token,
+      productId: productId,
+    }).request
+  }
+
+  const handleAction = async (isFavorite) => {
+    setLoading(true);
+    if (isFavorite) {
+      try {
+        await addToFavorites();
+      } catch (err) {
+        console.error("Error al agregar a favoritos:", err);
+        setError(true);
+        setIsFavorite(false);
+      }
+    } else {
+      try {
+        await removeToFavorites();
+      } catch (err) {
+        console.error("Error al agregeliminarar a favoritos:", err);
+        setError(true);
+        setIsFavorite(true);
+      }
+    }
+    setLoading(false);
+  }
+
 
   useEffect(() => {
     const getMate = async () => {
@@ -78,6 +109,7 @@ const ProductScreen = ({ route }) => {
         id: productId,
       }).request
       setMate(data);
+      setIsFavorite(data.favorited);
     }
     getMate();
   }, []);
@@ -103,7 +135,7 @@ const ProductScreen = ({ route }) => {
             </TouchableOpacity>
             <TouchableOpacity className="flex flex-row justify-center items-center h-[55px] w-[55px] bg-white rounded-full " onPress={() => {
               setIsFavorite(!isFavorite)
-              addToFavorites()
+              handleAction(!isFavorite)
             }}>
               {isFavorite ? <Ionicons name="heart" size={30} color="red" /> : <Ionicons name="heart-outline" size={30} color="black" />}
             </TouchableOpacity>
@@ -233,6 +265,7 @@ const ProductScreen = ({ route }) => {
         </Screen>
       }
       <LoadingModal visible={loading} text="Cebando..." />
+      <ModalError visible={error} text="Error, vuelve a intentarlo!" handleClose={() => setError(false)} />
     </View>
   )
 }

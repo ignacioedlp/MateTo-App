@@ -50,7 +50,7 @@ const ProfileScreen = ({ route }) => {
         </View>
         <View className="flex flex-col items-center justify-center">
           <View className="flex flex-col items-center justify-center w-full h-24 space-y-3">
-            <Image source={{ uri: user.imageProfile }} width={100} height={100} className=" rounded-xl" />
+            <Image source={{ uri: user.imageProfile || "https://t3.ftcdn.net/jpg/03/46/83/96/240_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" }} width={100} height={100} className=" rounded-xl" />
             <Text className="text-lg font-bold text-black">Subir imagen</Text>
           </View>
         </View>

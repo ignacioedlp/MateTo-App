@@ -43,7 +43,7 @@ const FavoritesScreen = () => {
 
           {mates.length > 0 ?
             mates?.map((item, index) => (
-              <TouchableOpacity className="flex flex-col items-center w-1/2 px-3 mb-8 space-y-2 rounded-2xl" key={index}>
+              <TouchableOpacity className="flex flex-col items-center w-1/2 px-3 mb-8 space-y-2 rounded-2xl" key={index} onPress={() => navigation.navigate('ProductDetails', { productId: item.id })}>
                 <Image source={{ uri: item.imageUrls[0] }} className="h-[184px] w-full rounded-2xl  " />
                 <Text className="text-[17px] font-bold text-center text-black">{item.title}</Text>
               </TouchableOpacity>
